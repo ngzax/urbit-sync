@@ -1,0 +1,7 @@
+watch_dirs: [
+  '/Users/ngzax/Code/urbit-docs',
+  '/Users/ngzax/Code/urbit-examples',
+  '/Users/ngzax/Code/zaxlog'
+]
+
+pier: '~/urbits/socbud_fallen'

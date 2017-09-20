@@ -2,23 +2,23 @@
 
 require 'filewatcher'
 require 'pathname'
+require 'yaml'
 
-# From
-watch_dirs = [
-  '/Users/ngzax/Code/urbit-docs',
-  '/Users/ngzax/Code/urbit-examples',
-]
+config = YAML.load_file('_config.yml')
 
-# To
-pier = '~/urbits/socbud_fallen'
+watch_dirs = config['watch_dirs']
+pier = config['pier']
+
 desks = [
   '/sandbox',
-  '/examples'
+  '/sandbox',
+  '/sandbox'
 ]
 
 paths = [
   '/web',
-  ''
+  '',
+  '/web',
 ]
 
 
