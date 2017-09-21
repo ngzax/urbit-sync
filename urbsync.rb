@@ -2,25 +2,17 @@
 
 require 'filewatcher'
 require 'pathname'
-require 'yaml'
 
-config = YAML.load_file('_config.yml')
+def load_config
+  require 'yaml'
 
-watch_dirs = config['watch_dirs']
-pier = config['pier']
+  config = YAML.load_file('_config.yml')
 
-desks = [
-  '/sandbox',
-  '/sandbox',
-  '/sandbox'
-]
-
-paths = [
-  '/web',
-  '',
-  '/web',
-]
-
+  desks = config['desks']
+  paths = config['paths']
+  pier = config['pier']
+  watch_dirs = config['watch_dirs']
+end
 
 FileWatcher.new(watch_dirs).watch do |fn, ev|
   p = Pathname.new(fn)
