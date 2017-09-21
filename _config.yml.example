@@ -1,7 +1,16 @@
 watch_dirs: [
   '/Users/ngzax/Code/urbit-docs',
   '/Users/ngzax/Code/urbit-examples',
-  '/Users/ngzax/Code/zaxlog'
+]
+
+desks: [
+  '/sandbox',
+  '/sandbox',
+]
+
+paths: [
+  '/web',
+  '',
 ]
 
 pier: '~/urbits/socbud_fallen'
