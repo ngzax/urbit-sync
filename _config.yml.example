@@ -3,6 +3,10 @@ watch_dirs: [
   '/Users/ngzax/Code/urbit-examples',
 ]
 
+excluded_files: [
+  'readme.md'
+]
+
 desks: [
   '/sandbox',
   '/sandbox',
