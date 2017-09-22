@@ -1,15 +1,20 @@
+GIT
+  remote: https://github.com/thomasfl/filewatcher
+  revision: 194fa53fe893514974a933d551bbc118beff3920
+  specs:
+    filewatcher (0.5.4)
+      trollop (~> 2.1.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
-    filewatcher (0.5.4)
-      trollop (~> 2.0)
     trollop (2.1.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  filewatcher (= 0.5.4)
+  filewatcher!
 
 BUNDLED WITH
    1.15.4

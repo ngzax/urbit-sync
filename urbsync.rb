@@ -18,7 +18,7 @@ end
 
 c = load_config
 unless (c.empty?)
-  FileWatcher.new(c['watch_dirs']).watch do |fn, ev|
+  Filewatcher.new(c['watch_dirs']).watch do |fn, ev|
     p = Pathname.new(fn)
     watch_dir = c['watch_dirs'].find {|d| p.realpath.to_s.include?(d)}
     index = c['watch_dirs'].index(watch_dir)
