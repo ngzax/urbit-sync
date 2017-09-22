@@ -28,6 +28,6 @@ unless (c.empty?)
       cmd = "cp -af #{fn} #{c['pier']}#{c['desks'][index]}#{c['paths'][index]}#{rel_path}"
     end
     p "--> #{cmd}"
-    system(cmd)
+    system(cmd) if cmd
   end
 end
