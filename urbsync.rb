@@ -23,7 +23,7 @@ unless (c.empty?)
     watch_dir = c['watch_dirs'].find {|d| p.realpath.to_s.include?(d)}
     index = c['watch_dirs'].index(watch_dir)
 
-    if(ev == :changed)
+    if(ev == :updated)
       rel_path = p.realpath.sub(c['watch_dirs'][index], '').sub(fn, '')
       cmd = "cp -af #{fn} #{c['pier']}#{c['desks'][index]}#{c['paths'][index]}#{rel_path}"
     end
