@@ -20,8 +20,19 @@ end
 def init
   p "Initializing all watch directories"
   c = load_config
-  c['watch_dirs'].each do |d|
-    p "copying all non-excluded files in #{d}"
+  c['excluded_files'] << '.' << '..' << '.DS_Store' << '.git' <<
+
+  c['watch_dirs'].each do |watch_dir|
+    p = Pathname.new(watch_dir)
+    index = c['watch_dirs'].index(watch_dir)
+
+    p.each_child do |pc|
+      unless ('.' == pc.basename.to_s[0]) || c['excluded_files'].include?(pc.basename.to_s)
+        rel_path = p.realpath.sub(c['watch_dirs'][index], '').sub(pc, '')
+        cmd = "cp -af #{pc} #{c['pier']}#{c['desks'][index]}#{c['paths'][index]}#{rel_path}"
+        p "--> #{cmd}"
+      end
+    end
   end
   exit 0
 end
