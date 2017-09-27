@@ -19,6 +19,10 @@ end
 
 def init
   p "Initializing all watch directories"
+  c = load_config
+  c['watch_dirs'].each do |d|
+    p "copying all non-excluded files in #{d}"
+  end
   exit 0
 end
 
