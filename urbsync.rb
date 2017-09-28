@@ -17,46 +17,42 @@ def load_config
   config
 end
 
-def init
+def copy(config, index, from_path)
+  to_file = from_path.basename.to_s
+  unless ('.' == from_path.basename.to_s[0]) || config['excluded_files'].include?(to_file)
+    rel_path = from_path.realpath.sub(config['watch_dirs'][index], '').sub(to_file, '')
+    cmd = "cp -af #{from_path} #{config['pier']}#{config['desks'][index]}#{config['paths'][index]}#{rel_path}"
+    p "--> #{cmd}"
+  else
+    p "Excluded, not copied --> #{to_file}"
+  end
+  system(cmd) if cmd
+end
+
+def init(c)
   p "Initializing all watch directories"
-  c = load_config
-  c['excluded_files'] << '.' << '..' << '.DS_Store' << '.git' <<
-
   c['watch_dirs'].each do |watch_dir|
-    p = Pathname.new(watch_dir)
     index = c['watch_dirs'].index(watch_dir)
-
-    p.each_child do |pc|
-      unless ('.' == pc.basename.to_s[0]) || c['excluded_files'].include?(pc.basename.to_s)
-        rel_path = p.realpath.sub(c['watch_dirs'][index], '').sub(pc, '')
-        cmd = "cp -af #{pc} #{c['pier']}#{c['desks'][index]}#{c['paths'][index]}#{rel_path}"
-        p "--> #{cmd}"
-      end
+    Pathname.new(watch_dir).each_child do |path_to_copy|
+      copy(c, index, path_to_copy)
     end
   end
   exit 0
 end
 
-def sync
-  c = load_config
-  unless (c.empty?)
-    Filewatcher.new(c['watch_dirs']).watch do |fn, ev|
-      p = Pathname.new(fn)
-      unless c['excluded_files'].include?(p.basename.to_s)
-        watch_dir = c['watch_dirs'].find {|d| p.realpath.to_s.include?(d)}
-        index = c['watch_dirs'].index(watch_dir)
-
-        if(ev == :updated)
-          rel_path = p.realpath.sub(c['watch_dirs'][index], '').sub(fn, '')
-          cmd = "cp -af #{fn} #{c['pier']}#{c['desks'][index]}#{c['paths'][index]}#{rel_path}"
-        end
-        p "--> #{cmd}"
-        system(cmd) if cmd
-      else
-        p "Excluded, not copied --> #{fn}"
-      end
+def sync(c)
+  p "Synchronizing all watch directories..."
+  Filewatcher.new(c['watch_dirs']).watch do |to_file, event|
+    watch_dir_pathname = Pathname.new(to_file)
+    watch_dir = c['watch_dirs'].find {|d| watch_dir_pathname.realpath.to_s.include?(d)}
+    index = c['watch_dirs'].index(watch_dir)
+    if(event == :updated)
+      copy(c, index, watch_dir_pathname)
     end
   end
 end
 
-('--init' == ARGV[0]) ? init : sync
+c = load_config
+unless (c.empty?)
+  ('--init' == ARGV[0]) ? init(c) : sync(c)
+end
