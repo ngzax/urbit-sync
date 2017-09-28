@@ -7,7 +7,7 @@ Initializes and Synchronizes your local filesystem and your mounted urbit pier.
 >  I created this because it was useful for me at this very early stage of
 >  urbit's life. It lets me check out the repos I am working on and not worry
 >  about keeping the files in sync. It also lets me define the
->  packages that I am including in my base pier setup so when one 
+>  packages that I am including in my base pier setup so when one
 >  crashes, getting another one fully  set up is a single command.
 
 >  It is *not* a substitute for an urbit package management system.
@@ -70,7 +70,7 @@ bundle exec ./urbsync.rb
 All of the available sections are illustrated in _config.yml.example. Here are
 descriptions of what each does:
 
-** watch_dirs ** : this is a list of the directories that you want to sync to
+**watch_dirs** : this is a list of the directories that you want to sync to
 your urbit. Note that these need to be full paths and you can't use ~ as a
 shortcut. You may need adapt the path based upon the git repo you are using.
 
@@ -85,24 +85,24 @@ the entry for watch_dir would look like so:
 '/home/ec2-user/source/urbit-extra-marks/src'
 ```
 
-** excluded_files ** : Put the file names of files you don't want to sync here.
+**excluded_files** : Put the file names of files you don't want to sync here.
 Right now this is valid across all watch_dirs.
 
-** desks ** : This is a list which needs to be in the same order as the
+**desks** : This is a list which needs to be in the same order as the
 watch_dirs and it defines which desk you want each watch_dir sync'ed to.
 
-** paths ** : This is the path within the desk above that you want the files
+**paths** : This is the path within the desk above that you want the files
 copied to. This also needs to be in the same order as the watch_dirs. If you
 just want to sync to the root, use ''.
 
-** pier ** : The fully qualified path to the pier that you want to sync to.
+**pier** : The fully qualified path to the pier that you want to sync to.
 
 
 ## Contributing
 
 I would appreciate contributions to urbit-sync.
 
-Everyone involved in the ** urbit-sync ** project needs to understand and
+Everyone involved in the **urbit-sync** project needs to understand and
 respect our Code of Conduct,  which has been shamelessly and appropriately
 borrowed in its entirety from [urbit][2]:
 
