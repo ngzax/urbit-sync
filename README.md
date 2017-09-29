@@ -2,14 +2,14 @@
 
 Initializes and Synchronizes your local filesystem and your mounted urbit pier.
 
+I created this because it was useful for me at this very early stage of
+urbit's life. It lets me check out the repos I am working on and not worry
+about keeping the files in sync. It also lets me define the
+packages that I am including in my base pier setup so when one
+crashes, getting another one fully  set up is a single command.
+
 > DISCLAIMER:
-
->  I created this because it was useful for me at this very early stage of
->  urbit's life. It lets me check out the repos I am working on and not worry
->  about keeping the files in sync. It also lets me define the
->  packages that I am including in my base pier setup so when one
->  crashes, getting another one fully  set up is a single command.
-
+>
 >  It is *not* a substitute for an urbit package management system.
 >  ~rophex-hashes has been doing some great early work on a prototype for this
 >  called urbit-package. See  [this post on
