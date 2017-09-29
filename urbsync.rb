@@ -46,7 +46,7 @@ def sync(c)
     watch_dir_pathname = Pathname.new(to_file)
     watch_dir = c['watch_dirs'].find {|d| watch_dir_pathname.realpath.to_s.include?(d)}
     index = c['watch_dirs'].index(watch_dir)
-    if(event == :updated)
+    unless event == :deleted
       copy(c, index, watch_dir_pathname)
     end
   end
