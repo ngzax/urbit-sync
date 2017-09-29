@@ -16,6 +16,9 @@ crashes, getting another one fully  set up is a single command.
 >  fora](https://urbit.org/fora/posts/~2017.9.7..23.20.06..dc47~/) and [the
 >  github repository](https://github.com/asssaf/urbit-package).
 
+
+[Urbit](https://urbit.org) Fora Post for Discussion: https://urbit.org/~~/fora/posts/~2017.9.29..11.58.54..4dd1~
+
 ## Installation
 
 - If you don't have it already, install ruby any way you prefer. This was
