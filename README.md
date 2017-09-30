@@ -68,6 +68,17 @@ bundle exec ./urbsync.rb
 
 - Work!
 
+## Program Options
+
+```
+$ bundle exec ./urbsync.rb --help
+
+Usage: urbsync [options]
+    -i, --init              Initialize all watch directories and exit
+    -v, --verbose           Prints all operations to the console.
+```
+
+
 ## Configuration Guide
 
 All of the available sections are illustrated in _config.yml.example. Here are
