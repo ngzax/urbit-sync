@@ -43,12 +43,14 @@ end
 
 def sync(c)
   puts "Synchronizing all watch directories..." if c[:verbose]
-  Filewatcher.new(c['watch_dirs'], every: true).watch do |to_file, event|
-    watch_dir_pathname = Pathname.new(to_file)
-    watch_dir = c['watch_dirs'].find {|d| watch_dir_pathname.realpath.to_s.include?(d)}
-    index = c['watch_dirs'].index(watch_dir)
-    unless event == :deleted
-      copy(c, index, watch_dir_pathname)
+  Filewatcher.new(c['watch_dirs'], every: true).watch do |file_events|
+    file_events.each_pair do |to_file, event|
+      watch_dir_pathname = Pathname.new(to_file)
+      watch_dir = c['watch_dirs'].find {|d| watch_dir_pathname.realpath.to_s.include?(d)}
+      index = c['watch_dirs'].index(watch_dir)
+      unless event == :deleted
+        copy(c, index, watch_dir_pathname)
+      end
     end
   end
 end
