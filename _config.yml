@@ -2,6 +2,8 @@ watch_dirs: [
   '/Users/ngzax/Code/urbit/lush/app',
   '/Users/ngzax/Code/urbit/lush/gen',
   '/Users/ngzax/Code/urbit/lush/lib',
+  '/Users/ngzax/Code/urbit/lush/mar',
+  '/Users/ngzax/Code/urbit/lush/sur',
   '/Users/ngzax/Code/urbit/lush/tests'
 ]
 
@@ -13,6 +15,8 @@ desks: [
   '/base',
   '/base',
   '/base',
+  '/base',
+  '/base',
   '/base'
 ]
 
@@ -20,6 +24,8 @@ paths: [
   '/app',
   '/lib',
   '/lib',
+  '/mar',
+  '/sur',
   '/tests'
 ]
 

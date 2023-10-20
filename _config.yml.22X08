@@ -1,0 +1,17 @@
+watch_dirs: [
+  '/Users/ngzax/Code/urbit-string'
+]
+
+excluded_files: [
+  'readme.md'
+]
+
+desks: [
+  '/home'
+]
+
+paths: [
+  ''
+]
+
+pier: '~/urbits/zod'

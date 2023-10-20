@@ -7,14 +7,14 @@ require 'pathname'
 def load_config
   require 'yaml'
 
-  config_file = YAML.load_file('_config.yml')
+  config_file = YAML.load_file('.config.yml')
 
   config = {}
-  config['desks']          = config_file['desks']
-  config['excluded_files'] = config_file['excluded_files']
-  config['paths']          = config_file['paths']
-  config['pier']           = config_file['pier']
-  config['watch_dirs']     = config_file['watch_dirs']
+  config['desks']          = config_file['ships']['watch'].map {|a| a['desk']}
+  config['excluded_files'] = config_file['ships']['excluded_files']
+  config['paths']          = config_file['ships']['watch'].map {|a| a['path']}
+  config['pier']           = config_file['ships']['pier']
+  config['watch_dirs']     = config_file['ships']['watch'].map {|a| a['src']}
   config
 end
 
