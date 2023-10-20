@@ -1,20 +1,14 @@
-watch_dirs: [
-  '/Users/ngzax/Code/urbit-docs',
-  '/Users/ngzax/Code/urbit-examples',
-]
-
-excluded_files: [
-  'readme.md'
-]
-
-desks: [
-  '/sandbox',
-  '/sandbox',
-]
-
-paths: [
-  '/web',
-  '',
-]
-
-pier: '~/urbits/socbud_fallen'
+ships: {
+  ship: '~sev',
+  pier: '~/Urbit/pir/sev',
+  excluded_files: ['readme.md'],
+  watch: [
+    {src: '/Users/ngzax/Code/urbit/lush/app',   desk: '/base', path: '/app'},
+    {src: '/Users/ngzax/Code/urbit/lush/gen',   desk: '/base', path: '/gen'},
+    {src: '/Users/ngzax/Code/urbit/lush/lib',   desk: '/base', path: '/lib'},
+    {src: '/Users/ngzax/Code/urbit/lush/mar',   desk: '/base', path: '/mar'},
+    {src: '/Users/ngzax/Code/urbit/lush/sur',   desk: '/base', path: '/sur'},
+    {src: '/Users/ngzax/Code/urbit/lush/ted',   desk: '/base', path: '/ted'},
+    {src: '/Users/ngzax/Code/urbit/lush/tests', desk: '/base', path: '/tests'}
+  ]
+}
