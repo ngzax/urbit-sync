@@ -7,14 +7,32 @@ require 'pathname'
 def load_config
   require 'yaml'
 
-  config_file = YAML.load_file('.config.yml')
+  config_file = YAML.load_file('_config.yml')
 
   config = {}
-  config['desks']          = config_file['ships']['watch'].map {|a| a['desk']}
-  config['excluded_files'] = config_file['ships']['excluded_files']
-  config['paths']          = config_file['ships']['watch'].map {|a| a['path']}
-  config['pier']           = config_file['ships']['pier']
-  config['watch_dirs']     = config_file['ships']['watch'].map {|a| a['src']}
+
+  ships = config_file['ships']
+  ships.each do |ship|
+    config['pier']           = ship['ship']['pier']
+    config['excluded_files'] = ship['ship']['excluded_files']
+
+    config['watch_dirs'] = []
+    config['desks']      = []
+    config['paths']      = []
+
+    watches = ship['ship']['watch']
+    watches.each do |app|
+      root = app['app']['root']
+      config['watch_dirs'] << app['app']['comp'].map {|a| "#{root}#{a['src']}"}
+      config['desks']      << app['app']['comp'].map {|a| "#{a['desk']}"}
+      config['paths']      << app['app']['comp'].map {|a| "#{a['path']}"}
+    end
+  end
+
+  config['watch_dirs'].flatten!
+  config['desks'].flatten!
+  config['paths'].flatten!
+
   config
 end
 
@@ -42,11 +60,17 @@ def init(c)
 end
 
 def sync(c)
-  puts "Synchronizing all watch directories..." if c[:verbose]
+  if c[:verbose]
+    puts "Synchronizing all watch directories..."
+    c['watch_dirs'].each_with_index {|w, i| puts "#{w} --> #{c['pier']}#{c['desks'][i]}#{c['paths'][i]}"}
+  end
   Filewatcher.new(c['watch_dirs'], every: true).watch do |file_events|
     file_events.each_pair do |to_file, event|
       watch_dir_pathname = Pathname.new(to_file)
-      watch_dir = c['watch_dirs'].find {|d| watch_dir_pathname.realpath.to_s.include?(d)}
+      watch_dir = c['watch_dirs'].find do |d|
+        d.tr!('*', '')
+        watch_dir_pathname.realpath.to_s.include?(d)
+      end
       index = c['watch_dirs'].index(watch_dir)
       unless event == :deleted
         copy(c, index, watch_dir_pathname)
