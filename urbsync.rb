@@ -36,12 +36,25 @@ def load_config
   config
 end
 
+def assemble_path(pier, desk, path, rel_path)
+  to_path = "#{pier}#{desk}#{path}#{rel_path}"
+  if !Dir.exist?(to_path)
+    cmd = "mkdir #{to_path}"
+    puts "--> #{cmd}"
+    system(cmd) if cmd
+  end
+  to_path
+end
+
 def copy(config, index, from_path)
   to_file = from_path.basename.to_s
   unless ('.' == from_path.basename.to_s[0]) || config['excluded_files'].include?(to_file)
-    rel_path = from_path.realpath.sub(config['watch_dirs'][index], '').sub(to_file, '')
-    cmd = "cp -af #{from_path} #{config['pier']}#{config['desks'][index]}#{config['paths'][index]}#{rel_path}"
-    puts "--> #{cmd}" if config[:verbose]
+    unless Pathname.new(from_path).symlink?
+      rel_path = from_path.realpath.sub(config['watch_dirs'][index], '').sub(to_file, '')
+      to_path = assemble_path(config['pier'], config['desks'][index], config['paths'][index], rel_path)
+      cmd = "cp -af #{from_path} #{to_path}"
+      puts "--> #{cmd}" if config[:verbose]
+    end
   else
     puts "Excluded, not copied --> #{to_file}" if config[:verbose]
   end
@@ -51,9 +64,11 @@ end
 def init(c)
   puts "Initializing all watch directories" if c[:verbose]
   c['watch_dirs'].each do |watch_dir|
-    index = c['watch_dirs'].index(watch_dir)
-    Pathname.new(watch_dir).each_child do |path_to_copy|
-      copy(c, index, path_to_copy)
+    unless watch_dir[-1] == '*'
+      index = c['watch_dirs'].index(watch_dir)
+      Pathname.new(watch_dir).each_child do |path_to_copy|
+        copy(c, index, path_to_copy)
+      end
     end
   end
   exit 0
