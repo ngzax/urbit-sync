@@ -1,20 +1,30 @@
-watch_dirs: [
-  '/Users/ngzax/Code/urbit-docs',
-  '/Users/ngzax/Code/urbit-examples',
-]
-
-excluded_files: [
-  'readme.md'
-]
-
-desks: [
-  '/sandbox',
-  '/sandbox',
-]
-
-paths: [
-  '/web',
-  '',
-]
-
-pier: '~/urbits/socbud_fallen'
+ships: {
+  ship: '~sev',
+  pier: '~/Urbit/pir/sev',
+  excluded_files: ['readme.md'],
+  watch: [
+    app: {
+      root: '/Users/ngzax/Code/urbit/lush',
+      comp: [
+        {src: '/app/',  desk: '/base', path: '/app'},
+        {src: '/gen/',  desk: '/base', path: '/gen'},
+        {src: '/lib/',  desk: '/base', path: '/lib'},
+        {src: '/mar/',  desk: '/base', path: '/mar'},
+        {src: '/sur/',  desk: '/base', path: '/sur'},
+        {src: '/ted/',  desk: '/base', path: '/ted'},
+        {src: '/tests', desk: '/base', path: '/tests'},
+        {src: '/app-school/alpha/', desk: '/alpha', path: '/'},
+      ]
+    },
+    app: {
+      root: '/Users/ngzax/Code/urbit/prop',
+      comp: [
+        {src: '/app/', desk: '/prop', path: '/app'},
+        {src: '/lib/', desk: '/prop', path: '/lib'},
+        {src: '/mar/', desk: '/prop', path: '/mar'},
+        {src: '/sur/', desk: '/prop', path: '/sur'},
+        {src: '/*',    desk: '/prop', path: '/'},     # No Subdirs!
+      ]
+    }
+  ]
+}
