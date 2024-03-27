@@ -1,5 +1,11 @@
 # urbit-sync
 
+## THIS PROJECT IS NOW OFFICIALLY DEPRECATED
+and I will no longer be updating or maintaing it. In the course of working on this last multi-pier work I discovered to my chagrin that it is far easier to just use `rsync`.
+
+Still, it was fun while it lasted. :)
+
+## About
 Initializes and Synchronizes your local filesystem and your mounted urbit pier.
 
 I created this because it was useful for me at this very early stage of
